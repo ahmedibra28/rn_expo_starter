@@ -9,6 +9,7 @@ import apiHook from '../utils'
 import useUserInfoStore from '../zustand/userStore'
 import { useIsFocused } from '@react-navigation/native'
 import FlashMessage, { showMessage } from 'react-native-flash-message'
+import Header from '../components/Header'
 
 interface FormData {
   mobile: number
@@ -71,39 +72,42 @@ const LoginScreen = ({ navigation }: NavigationProps) => {
 
   return (
     <Layout>
-      <FlashMessage position='top' />
+      <View className='flex-1'>
+        <FlashMessage position='top' />
+        <Header />
 
-      <View className='mx-4'>
-        <View className='mb-10'>
-          <Text className='text-white text-5xl font-bold'>
-            LOGIN
-            <Text className='font-thin'> WITH NUMBER</Text>
-          </Text>
-        </View>
-        <View className='mb-5'>
-          <CustomInput
-            control={control}
-            rules={{
-              required: 'Mobile is required',
-            }}
-            errors={errors}
-            customClassName='p-4 border border-base-100 text-white rounded-full'
-            name='mobile'
-            autoFocus={true}
-            placeholder='Enter your mobile number'
-            keyboardType='number-pad'
-            textContentType='telephoneNumber'
-          />
-        </View>
+        <View className='mx-4'>
+          <View className='mb-10'>
+            <Text className='text-primary text-3xl font-bold'>
+              LOGIN / REGISTER
+              <Text className='font-thin'> WITH NUMBER</Text>
+            </Text>
+          </View>
+          <View className='mb-5'>
+            <CustomInput
+              control={control}
+              rules={{
+                required: 'Mobile is required',
+              }}
+              errors={errors}
+              customClassName='border border-primary rounded-full'
+              name='mobile'
+              autoFocus={true}
+              placeholder='Enter your mobile number'
+              keyboardType='number-pad'
+              textContentType='telephoneNumber'
+            />
+          </View>
 
-        <View className='mb-5'>
-          <SubmitButton
-            onPress={handleSubmit(onSubmit)}
-            isLoading={isLoading}
-            buttonText='Login'
-            customClassName='p-4 bg-base-100 rounded-full'
-            textClassName='text-gray-100 font-bold text-center text-lg'
-          />
+          <View className='mb-5'>
+            <SubmitButton
+              onPress={handleSubmit(onSubmit)}
+              isLoading={isLoading}
+              buttonText='Next'
+              customClassName='p-4 bg-primary rounded-full'
+              textClassName='text-gray-100 font-bold text-center text-lg'
+            />
+          </View>
         </View>
       </View>
     </Layout>

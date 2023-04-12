@@ -1,6 +1,6 @@
 import React from 'react'
 import { Control, Controller, FieldErrors } from 'react-hook-form'
-import { Text, TextInput } from 'react-native'
+import { Platform, Text, TextInput } from 'react-native'
 
 interface CustomInputProps {
   textContentType:
@@ -62,7 +62,7 @@ const CustomInput = ({
   placeholder,
   name,
   control,
-  customClassName = 'p-4 border border-base-100 text-white rounded-full',
+  customClassName = 'border border-primary text-white rounded-full',
   autoFocus = false,
   secureTextEntry = false,
   rules = {},
@@ -89,9 +89,9 @@ const CustomInput = ({
             autoFocus={autoFocus}
             onChangeText={onChange}
             onBlur={onBlur}
-            className={`${customClassName} ${
-              error ? 'border border-red-500' : ''
-            } `}
+            className={`${
+              Platform.OS === 'android' ? 'p-2.5' : 'p-4'
+            } ${customClassName} ${error ? 'border border-red-500' : ''} `}
             placeholder={placeholder}
             keyboardType={keyboardType}
             textContentType={textContentType}

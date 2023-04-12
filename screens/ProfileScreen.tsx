@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import CustomInput from '../components/CustomInput'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import SubmitButton from '../components/SubmitButton'
+import Header from '../components/Header'
 
 interface FormData {
   name: string
@@ -49,15 +50,7 @@ const ProfileScreen = () => {
   return (
     <Layout>
       <View className='flex-1'>
-        <View className='h-1/4 bg-base-100 rounded-bl-3xl rounded-br-3xl justify-center items-center mb-5'>
-          <View className='mx-4'>
-            <Image
-              source={require('../assets/barber-header.png')}
-              className='w-28 h-28 rounded-full object-cover'
-            />
-            <Text className='text-white text-2xl font-bold'>John Doe</Text>
-          </View>
-        </View>
+        <Header />
 
         <View className='mx-4'>
           <View className='mb-5'>
@@ -67,7 +60,7 @@ const ProfileScreen = () => {
                 required: 'Name is required',
               }}
               errors={errors}
-              customClassName='p-4 border border-t-0 border-l-0 border-r-0 border-base-100 text-white'
+              customClassName='border border-t-0 border-l-0 border-r-0 border-primary'
               name='name'
               autoFocus={true}
               placeholder='Enter your name'
@@ -83,7 +76,7 @@ const ProfileScreen = () => {
                 required: 'Address is required',
               }}
               errors={errors}
-              customClassName='p-4 border border-t-0 border-l-0 border-r-0 border-base-100 text-white'
+              customClassName='border border-t-0 border-l-0 border-r-0 border-primary'
               name='address'
               placeholder='Enter your address'
               keyboardType='default'
@@ -92,9 +85,7 @@ const ProfileScreen = () => {
           </View>
 
           <View className='mb-5'>
-            <Text className='text-white text-lg'>
-              Change your (workplace) barbershop
-            </Text>
+            <Text className='text-lg'>Change your (workplace) barbershop</Text>
           </View>
 
           <View className='mb-5'>
@@ -104,7 +95,7 @@ const ProfileScreen = () => {
                 required: 'Swap is required',
               }}
               errors={errors}
-              customClassName='p-4 border border-t-0 border-l-0 border-r-0 border-base-100 text-white'
+              customClassName='border border-t-0 border-l-0 border-r-0 border-primary'
               name='swap'
               placeholder='Select other barbershop'
               keyboardType='default'
@@ -117,7 +108,7 @@ const ProfileScreen = () => {
               onPress={handleSubmit(onSubmit)}
               isLoading={isLoading}
               buttonText='Update'
-              customClassName='p-4 bg-base-100 rounded-full'
+              customClassName='p-4 bg-primary rounded-full'
               textClassName='text-gray-100 font-bold text-center text-lg'
             />
           </View>

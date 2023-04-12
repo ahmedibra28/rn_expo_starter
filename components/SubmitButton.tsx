@@ -17,7 +17,7 @@ interface SubmitButtonProps extends TouchableOpacityProps {
 const SubmitButton: React.FC<SubmitButtonProps> = ({
   isLoading,
   buttonText,
-  customClassName = 'p-4 bg-base-100 rounded-full',
+  customClassName = 'p-4 bg-primary rounded-full',
   textClassName = 'text-gray-100 font-bold text-center text-lg',
   disabled = false,
   ...rest

@@ -33,7 +33,7 @@ const CustomModal = ({
               onPress={() => setModalVisible(!modalVisible)}
               isLoading={false}
               buttonText='Close'
-              customClassName='p-4 bg-base-100 rounded-full'
+              customClassName='p-4 bg-primary rounded-full'
               textClassName='text-gray-100 font-bold text-center text-lg'
             />
           </View>
