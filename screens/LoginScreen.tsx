@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import React from 'react'
 import Layout from '../components/Layout'
 import CustomInput from '../components/CustomInput'
@@ -10,21 +10,17 @@ import useUserInfoStore from '../zustand/userStore'
 import { useIsFocused } from '@react-navigation/native'
 import FlashMessage, { showMessage } from 'react-native-flash-message'
 
-const LoginScreen = ({ navigation }: NavigationProps) => {
-  interface FormData {
-    email: string
-    password: string
-  }
+interface FormData {
+  mobile: number
+}
 
+const LoginScreen = ({ navigation }: NavigationProps) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    defaultValues: {
-      email: 'info@ahmedibra.com',
-      password: '123',
-    },
+    defaultValues: {},
   })
 
   const { updateUserInfo, setAuth, isAuth } = useUserInfoStore((state) => state)
@@ -47,82 +43,66 @@ const LoginScreen = ({ navigation }: NavigationProps) => {
   })?.post
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    login
-      ?.mutateAsync({ ...data, platform: 'web' })
-      .then((res: any) => {
-        updateUserInfo({
-          _id: res._id,
-          name: res.name,
-          token: res.token,
-          email: res.email,
-          role: res.role,
-        })
-        setAuth(true)
-
-        navigation.navigate('HomeBottomTabs')
-      })
-      .catch((err) => {
-        showMessage({
-          message: err,
-          type: 'danger',
-          icon: 'danger',
-          duration: 5000,
-        })
-        console.log('❌❌❌❌❌❌: ', err)
-      })
+    navigation.navigate('OTP')
+    // login
+    //   ?.mutateAsync({ ...data, platform: 'web' })
+    //   .then((res: any) => {
+    //     updateUserInfo({
+    //       _id: res._id,
+    //       name: res.name,
+    //       token: res.token,
+    //       email: res.email,
+    //       role: res.role,
+    //     })
+    //     setAuth(true)
+    //     navigation.navigate('HomeBottomTabs')
+    //   })
+    //   .catch((err) => {
+    //     showMessage({
+    //       message: err,
+    //       type: 'danger',
+    //       icon: 'danger',
+    //       duration: 5000,
+    //     })
+    //     console.log('❌❌❌❌❌❌: ', err)
+    //   })
   }
   const isLoading = false
 
   return (
     <Layout>
       <FlashMessage position='top' />
+
       <View className='mx-4'>
-        <View className='my-2 min-w-screen'>
+        <View className='mb-10'>
+          <Text className='text-white text-5xl font-bold'>
+            LOGIN
+            <Text className='font-thin'> WITH NUMBER</Text>
+          </Text>
+        </View>
+        <View className='mb-5'>
           <CustomInput
             control={control}
             rules={{
-              required: 'Email is required',
+              required: 'Mobile is required',
             }}
             errors={errors}
-            customClassName='bg-gray-50 p-2.5 rounded-full'
-            name='email'
+            customClassName='p-4 border border-base-100 text-white rounded-full'
+            name='mobile'
             autoFocus={true}
-            placeholder='info@ahmedibra.com'
-            keyboardType='email-address'
-            textContentType='emailAddress'
+            placeholder='Enter your mobile number'
+            keyboardType='number-pad'
+            textContentType='telephoneNumber'
           />
         </View>
-        <View className='my-2 min-w-screen'>
-          <CustomInput
-            control={control}
-            rules={{
-              required: 'Password is required',
-            }}
-            errors={errors}
-            customClassName='bg-gray-50 p-2.5 rounded-full'
-            name='password'
-            placeholder='********'
-            keyboardType='visible-password'
-            secureTextEntry={true}
-            textContentType='name'
-          />
-        </View>
-        <View className='mb-2 mt-5'>
+
+        <View className='mb-5'>
           <SubmitButton
             onPress={handleSubmit(onSubmit)}
             isLoading={isLoading}
             buttonText='Login'
-            customClassName='bg-orange-50 border-orange-500 border rounded-full'
-            textClassName='text-gray-100 font-bold text-center'
-          />
-        </View>
-        <View className='mb-2 mt-5'>
-          <SubmitButton
-            onPress={() => navigation.navigate('Register')}
-            isLoading={isLoading}
-            buttonText='Register'
-            customClassName='bg-gray-100 border-orange-500 border rounded-full'
-            textClassName='text-orange-50 font-bold text-center'
+            customClassName='p-4 bg-base-100 rounded-full'
+            textClassName='text-gray-100 font-bold text-center text-lg'
           />
         </View>
       </View>

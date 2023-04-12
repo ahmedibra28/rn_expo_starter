@@ -52,6 +52,8 @@ interface CustomInputProps {
   rules?: Record<string, unknown>
   editable?: boolean
   errors?: FieldErrors<any>
+  multiline?: boolean
+  numberOfLines?: number
 }
 
 const CustomInput = ({
@@ -60,11 +62,14 @@ const CustomInput = ({
   placeholder,
   name,
   control,
-  customClassName = 'bg-gray-50 p-2.5 rounded-full',
+  customClassName = 'p-4 border border-base-100 text-white rounded-full',
   autoFocus = false,
   secureTextEntry = false,
   rules = {},
   editable = true,
+  multiline = false,
+  numberOfLines = 1,
+  ...rest
 }: CustomInputProps) => {
   return (
     <Controller
@@ -77,12 +82,15 @@ const CustomInput = ({
       }) => (
         <>
           <TextInput
+            {...rest}
+            multiline={multiline}
+            numberOfLines={numberOfLines}
             value={value}
             autoFocus={autoFocus}
             onChangeText={onChange}
             onBlur={onBlur}
             className={`${customClassName} ${
-              error ? 'border border-red-500' : 'border border-orange-50'
+              error ? 'border border-red-500' : ''
             } `}
             placeholder={placeholder}
             keyboardType={keyboardType}
@@ -91,7 +99,7 @@ const CustomInput = ({
             editable={editable}
           />
           {error && (
-            <Text className='text-red-500 text-xs'>
+            <Text className='text-red-500 text-xs text-center'>
               {error?.message || 'Error'}
             </Text>
           )}
@@ -100,5 +108,4 @@ const CustomInput = ({
     />
   )
 }
-
 export default CustomInput

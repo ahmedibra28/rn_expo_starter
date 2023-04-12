@@ -11,7 +11,7 @@ export default function App() {
     <SafeAreaProvider>
       <StatusBar style='auto' />
       <QueryClientProvider client={queryClient}>
-        <StackNavigation />
+          <StackNavigation />
       </QueryClientProvider>
     </SafeAreaProvider>
   )

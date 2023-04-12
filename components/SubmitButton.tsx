@@ -11,23 +11,30 @@ interface SubmitButtonProps extends TouchableOpacityProps {
   buttonText: string
   customClassName?: string
   textClassName?: string
+  disabled?: boolean
 }
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({
   isLoading,
   buttonText,
-  customClassName = 'bg-orange-50 border-orange-500 border rounded-full',
-  textClassName = 'text-gray-100 font-bold text-center',
+  customClassName = 'p-4 bg-base-100 rounded-full',
+  textClassName = 'text-gray-100 font-bold text-center text-lg',
+  disabled = false,
   ...rest
-}) => {
+}: SubmitButtonProps) => {
   return (
     <TouchableOpacity
       {...rest}
-      disabled={isLoading}
-      className={`p-2.5 ${customClassName}`}
+      disabled={isLoading || disabled ? true : false}
+      className={`${customClassName} ${
+        isLoading || disabled ? 'opacity-50' : ''
+      }`}
     >
       {isLoading ? (
-        <ActivityIndicator size='small' color='#fff' />
+        <Text className={`uppercase ${textClassName}`}>
+          {' '}
+          <ActivityIndicator size='small' color='#fff' />
+        </Text>
       ) : (
         <Text className={`uppercase ${textClassName}`}>{buttonText}</Text>
       )}
